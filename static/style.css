@@ -761,49 +761,65 @@ footer {
         gap: 0.75rem;
         flex-wrap: wrap;
         width: 100%;
-        padding: 0 14px;
+        padding: 0 10px;
+    }
+
+    .nav-toggle {
+        display: inline-block;
+        order: 2;
+        align-self: flex-end;
+        background: none;
+        border: 1px solid #cbd5e1;
+        color: white;
+        padding: 0.45rem 0.6rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
     }
 
     .nav-links {
         width: 100%;
-        flex-wrap: wrap;
-        gap: 0.6rem;
+        flex-wrap: nowrap;
+        gap: 0.4rem;
         justify-content: flex-start;
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0.35rem 0.5rem 0.25rem;
+        display: none;
+        background: rgba(11, 59, 55, 0.7);
+        border-radius: 6px;
     }
 
+    .nav-links.open { display: flex; }
+
     .nav-links a {
-        padding: 0.35rem 0.7rem;
-        width: 100%;
+        padding: 0.35rem 0.6rem;
+        width: auto;
+        white-space: nowrap;
+        font-size: 0.95rem;
     }
 
     .nav-search {
         width: 100%;
         gap: 0.35rem;
-        flex-direction: column;
+        flex-direction: row;
         margin-top: 0.25rem;
+        align-items: stretch;
     }
 
     .nav-search input,
     .nav-search button {
-        width: 100%;
+        width: auto;
+        flex: 1;
     }
 
-    .hero {
-        padding: 3rem 0 2.5rem;
-    }
+    .hero { padding: 3rem 0 2.5rem; }
+    .modules-grid, .cards, .modules-list { grid-template-columns: 1fr; }
 
-    .modules-grid,
-    .cards,
-    .modules-list { grid-template-columns: 1fr; }
-
-    .card,
-    .module-card,
-    .module-detail,
-    .requirements-content,
-    .about-content,
-    .exam-form {
+    .card, .module-card, .module-detail,
+    .requirements-content, .about-content, .exam-form {
         padding: 1.25rem;
     }
 
@@ -813,18 +829,20 @@ footer {
 }
 
 @media (max-width: 540px) {
+    .navbar { padding: 0.75rem 0.4rem; }
+    .navbar .container { padding: 0 8px; gap: 0.5rem; }
+    .nav-links { gap: 0.3rem; }
+    .nav-links a { font-size: 0.9rem; }
+
     .hero h1 { font-size: 1.8rem; }
     .hero .subtitle, .hero p { font-size: 1rem; }
-    .nav-links a { font-size: 0.95rem; }
 
     .module-card h2 { font-size: 1.05rem; }
-    .module-card,
-    .module-detail,
-    .requirements-content,
-    .about-content,
-    .exam-form { padding: 1rem; }
+    .module-card, .module-detail,
+    .requirements-content, .about-content, .exam-form { padding: 1rem; }
 
     .topic { border-left-width: 3px; }
     .exam-options label { align-items: flex-start; }
     .search-bar { flex-direction: column; }
 }
+

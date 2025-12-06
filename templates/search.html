@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>חיפוש במדריך</h1>
+    <form class="search-bar" action="{{ url_for('search') }}" method="get">
+        <input type="text" name="q" value="{{ query }}" placeholder="חיפוש מושגים, מודלים או מילת מפתח..." aria-label="חיפוש">
+        <button type="submit">חפש</button>
+    </form>
+
+    {% if query %}
+    <p class="subtitle">תוצאות עבור: "{{ query }}"</p>
+    {% if results %}
+    <div class="search-results">
+        {% for item in results %}
+        <div class="search-result">
+            <h2>{{ item.module.emoji if item.module.emoji else '📘' }} {{ item.module.title }}</h2>
+            <p class="description">{{ item.module.description }}</p>
+            {% if item.snippets %}
+            <ul>
+                {% for snip in item.snippets %}
+                <li>{{ snip|safe }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <a href="{{ url_for('module_detail', module_id=item.module.id) }}" class="btn btn-secondary">למודול</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>לא נמצאו תוצאות. נסו ניסוח אחר.</p>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

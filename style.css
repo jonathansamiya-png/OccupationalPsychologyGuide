@@ -205,7 +205,7 @@ body {
 }
 
 .card::after {
-    content: "✨";
+    content: "ג¨";
     position: absolute;
     top: 12px;
     left: 16px;
@@ -494,7 +494,7 @@ body {
 }
 
 .readings li::before {
-    content: "↗";
+    content: "ג†—";
     position: absolute;
     right: 0;
     color: #14b8a6;
@@ -753,6 +753,40 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 14px;
+    }
+
+    .navbar .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .nav-links {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        justify-content: flex-end;
+    }
+
+    .nav-links a {
+        padding: 0.35rem 0.7rem;
+    }
+
+    .nav-search {
+        width: 100%;
+    }
+
+    .nav-search input,
+    .nav-search button {
+        width: 100%;
+    }
+
+    .hero {
+        padding: 3rem 0 2.5rem;
+    }
+
     .nav-links {
         gap: 1rem;
     }
@@ -779,5 +813,26 @@ footer {
 
     .hero h1 {
         font-size: 2.1rem;
+    }
+
+    .card,
+    .module-card,
+    .module-detail,
+    .requirements-content,
+    .about-content,
+    .exam-form {
+        padding: 1.25rem;
+    }
+
+    .module-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .topic {
+        padding-left: 1rem;
+    }
+
+    .exam-actions {
+        flex-direction: column;
     }
 }

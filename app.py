@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify, request
 import json
 from data import get_guide_content
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config['JSON_AS_ASCII'] = False
 
 @app.route('/')

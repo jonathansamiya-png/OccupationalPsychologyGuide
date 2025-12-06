@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מדריך למתמחה בפסיכולוגיה תעסוקתית</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">פסיכולוגיה תעסוקתית</h1>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}" class="active">דף הבית</a></li>
+                <li><a href="{{ url_for('modules') }}">מודולים</a></li>
+                <li><a href="{{ url_for('final_exam') }}">מבחן מסכם</a></li>
+                <li><a href="{{ url_for('requirements') }}">דרישות התמחות</a></li>
+                <li><a href="{{ url_for('about') }}">אודות</a></li>
+            </ul>
+            <form class="nav-search" action="{{ url_for('search') }}" method="get">
+                <input type="text" name="q" placeholder="חיפוש מושגים..." aria-label="חיפוש">
+                <button type="submit">🔍</button>
+            </form>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <p>&copy; 2024 מדריך למתמחה בפסיכולוגיה תעסוקתית. בהשראת Cook (2016) ו-Gatewood (2015)</p>
+    </footer>
+</body>
+<script>
+// Quiz interactivity: mark answers and show feedback
+document.addEventListener('click', (e) => {
+    if (!e.target.classList.contains('quiz-option')) return;
+    const optionsContainer = e.target.closest('.quiz-options');
+    if (!optionsContainer) return;
+    const correctIndex = parseInt(optionsContainer.dataset.correct, 10);
+    const buttons = optionsContainer.querySelectorAll('.quiz-option');
+    const feedback = optionsContainer.querySelector('.quiz-feedback');
+    buttons.forEach((btn, idx) => {
+        btn.classList.remove('correct', 'incorrect', 'selected');
+        if (idx === correctIndex) btn.classList.add('correct');
+    });
+    buttons.forEach(btn => btn.disabled = true);
+    const selectedIndex = Array.from(buttons).indexOf(e.target);
+    e.target.classList.add('selected', selectedIndex === correctIndex ? 'correct' : 'incorrect');
+    if (feedback) {
+        feedback.textContent = selectedIndex === correctIndex ? '✔️ תשובה נכונה!' : '❌ נסה שוב במבחן הבא';
+    }
+});
+</script>
+</html>

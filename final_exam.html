@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>מבחן מסכם</h1>
+    <p class="subtitle">50 שאלות מכל המודולים. ציון עובר: 90.</p>
+
+    <form id="final-exam-form" class="exam-form">
+        {% for q in questions %}
+        {% set qindex = loop.index0 %}
+        <div class="exam-question" data-index="{{ qindex }}" data-correct="{{ q.correct }}">
+            <p class="exam-q"><strong>{{ loop.index }}.</strong> {{ q.q }}</p>
+            <div class="exam-options">
+                {% for opt in q.options %}
+                <label>
+                    <input type="radio" name="q{{ qindex }}" value="{{ loop.index0 }}">
+                    <span>{{ opt }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        <div class="exam-actions">
+            <button type="button" id="submit-exam" class="btn btn-primary">בדיקת המבחן</button>
+            <button type="button" id="reset-exam" class="btn btn-secondary">איפוס/מבחן חוזר</button>
+        </div>
+    </form>
+
+    <div id="exam-result" class="exam-result" style="display:none;">
+        <p class="score"></p>
+        <p class="passfail"></p>
+        <div class="retry" style="display:none;">
+            <button type="button" id="retry-exam" class="btn btn-secondary">נסה שוב</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const submitBtn = document.getElementById('submit-exam');
+const resetBtn = document.getElementById('reset-exam');
+const resultBox = document.getElementById('exam-result');
+const retryBtn = document.getElementById('retry-exam');
+
+submitBtn.addEventListener('click', () => {
+    const questions = document.querySelectorAll('.exam-question');
+    let correct = 0;
+    questions.forEach(q => {
+        const correctIdx = parseInt(q.dataset.correct, 10);
+        const chosen = q.querySelector('input[type="radio"]:checked');
+        // לא מראים תשובה נכונה, רק מחשבים ציון
+        if (chosen && parseInt(chosen.value, 10) === correctIdx) {
+            correct += 1;
+        }
+    });
+    const score = Math.round((correct / questions.length) * 100);
+    resultBox.style.display = 'block';
+    resultBox.querySelector('.score').textContent = `ציון: ${score}`;
+    const passed = score >= 90;
+    resultBox.querySelector('.passfail').textContent = passed ? 'עברתם! ניתן להמשיך' : 'לא עברתם, נסו שוב (90 ומעלה).';
+    resultBox.querySelector('.retry').style.display = passed ? 'none' : 'block';
+});
+
+resetBtn.addEventListener('click', () => {
+    document.getElementById('final-exam-form').reset();
+    resultBox.style.display = 'none';
+});
+
+retryBtn?.addEventListener('click', () => {
+    document.getElementById('final-exam-form').reset();
+    resultBox.style.display = 'none';
+});
+</script>
+{% endblock %}

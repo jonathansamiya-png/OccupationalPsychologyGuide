@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <h1>🎓 ברוכים הבאים למדריך המתמחה</h1>
+        <p class="subtitle">Cook (2016) + Gatewood (2015) + דרישות ענף 1 = מסלול אחד מקיף</p>
+        <p>כל מה שצריך כדי לצלוח את ההתמחות בפסיכולוגיה תעסוקתית: תוכן תיאורטי, משימות מעשיות, שאלות מבחן, ויישור מלא לדרישות משרד הבריאות.</p>
+        <div class="hero-actions">
+            <a href="{{ url_for('modules') }}" class="btn btn-primary">התחל במודולים</a>
+            <a href="{{ url_for('requirements') }}" class="btn btn-secondary">ראה דרישות ענף 1</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <section class="overview">
+        <h2>🚀 סקירה כללית</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>7 מודולים</h3>
+                <p>מסלול ממוקד – פסיכומטריה, מיון, ראיון, אתיקה והתמחות</p>
+            </div>
+            <div class="card">
+                <h3>24 חודשים</h3>
+                <p>מתווה התמחות מלא עם אבני דרך ומעקב</p>
+            </div>
+            <div class="card">
+                <h3>ישירות מהמקורות</h3>
+                <p>Cook (2016), Gatewood (2015) + נהלי משרד הבריאות</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="modules-preview">
+        <h2>🧭 מה מחכה לך במסלול</h2>
+        <div class="modules-list">
+            <div class="module-item">
+                <h3>רקע + פסיכומטריה</h3>
+                <p>תוקף, מהימנות, סטנדרטיזציה והטיות מדידה</p>
+            </div>
+            <div class="module-item">
+                <h3>ניתוח עיסוק</h3>
+                <p>KSao, O*NET, SME ו-PAQ כדי לעגן כלי מיון</p>
+            </div>
+            <div class="module-item">
+                <h3>בניית מערכת מיון</h3>
+                <p>מבחנים, קומבינציות, חתכים והוגנות</p>
+            </div>
+            <div class="module-item">
+                <h3>ראיון תעסוקתי</h3>
+                <p>BEI, הטיות, BARS ומדריך ראיון מובנה</p>
+            </div>
+        </div>
+        <p class="text-center">
+            <a href="{{ url_for('modules') }}" class="btn btn-secondary">לכל המודולים</a>
+        </p>
+    </section>
+
+    <section class="about-guide">
+        <h2>אודות המדריך</h2>
+        <p>מדריך זה נוסח בהתאם לדרישות התמחות בענף 1 בפסיכולוגיה תעסוקתית של משרד הבריאות, ומבוסס על:</p>
+        <ul>
+            <li><strong>Cook (2016):</strong> Organizational Psychology - Theory and Practice</li>
+            <li><strong>Gatewood (2015):</strong> Applied Psychology in Human Resource Management</li>
+        </ul>
+        <p>המדריך מעניק הכנה מקיפה וממטודית לתמחות בתחום, כולל יעדי למידה, משימות מעשיות והפניות מדויקות למקורות.</p>
+    </section>
+</div>
+{% endblock %}

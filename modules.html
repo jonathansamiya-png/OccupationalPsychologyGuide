@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>📚 מודולים</h1>
+        <p class="subtitle">בחן את המסלול השלם – מכלים פסיכומטריים עד דרישות ההתמחות.</p>
+    </div>
+    <div class="modules-grid">
+        {% for module in modules %}
+        <div class="module-card">
+            <div class="module-number">{{ module.id }}</div>
+            <h2>{{ module.emoji if module.emoji else '📘' }} {{ module.title }}</h2>
+            <p class="description">{{ module.description }}</p>
+            <div class="topics-count">
+                נושאים: {{ module.topics|length }} | יעדי למידה: {{ module.learning_outcomes|length }} | שאלות מבחן: {{ module.quiz|length }}
+            </div>
+            {% if module.learning_outcomes %}
+            <ul class="mini-list">
+                {% for outcome in module.learning_outcomes[:2] %}
+                <li>✅ {{ outcome }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <a href="{{ url_for('module_detail', module_id=module.id) }}" class="btn btn-primary">קרא עוד</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

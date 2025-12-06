@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="breadcrumb">
+        <a href="{{ url_for('modules') }}">מודולים</a> / {{ module.title }}
+    </div>
+
+    <div class="module-detail">
+        <div class="module-header">
+            <h1>{{ module.emoji if module.emoji else '📘' }} {{ module.title }}</h1>
+            <p class="description">{{ module.description }}</p>
+        </div>
+
+        <div class="module-content">
+            <div class="topics">
+                {% for topic in module.topics %}
+                <div class="topic">
+                    <h2>{{ topic.title }}</h2>
+                    <div class="topic-content">
+                        <p>{{ topic.content|safe }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if module.learning_outcomes %}
+            <div class="panel">
+                <h3>🎯 יעדי למידה ויישור לענף 1</h3>
+                <ul>
+                    {% for outcome in module.learning_outcomes %}
+                    <li>{{ outcome }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if module.practical %}
+            <div class="panel">
+                <h3>🛠️ משימות מעשיות להתמחות</h3>
+                <ul>
+                    {% for item in module.practical %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if module.readings %}
+            <div class="panel">
+                <h3>📚 מקורות קריאה (Cook, Gatewood, נהלים)</h3>
+                <ul class="readings">
+                    {% for ref in module.readings %}
+                    <li>{{ ref }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if module.quiz %}
+            <div class="panel quiz-panel">
+                <h3>🧠 שאלות מבחן קצר (תרגול עצמי)</h3>
+                <ol class="quiz-list">
+                    {% for q in module.quiz %}
+                    <li class="quiz-item">
+                        <p class="quiz-question">{{ q.q }}</p>
+                        {% if q.options %}
+                        <div class="quiz-options" data-correct="{{ q.correct }}">
+                            {% for opt in q.options %}
+                            <button type="button" class="quiz-option">{{ opt }}</button>
+                            {% endfor %}
+                            <p class="quiz-feedback"></p>
+                            {% if q.explanation %}
+                            <p class="quiz-explanation">{{ q.explanation }}</p>
+                            {% endif %}
+                        </div>
+                        {% elif q.a %}
+                        <p class="quiz-answer">תשובה צפויה: {{ q.a }}</p>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ol>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="navigation">
+            {% if module.id > 1 %}
+            <a href="{{ url_for('module_detail', module_id=module.id - 1) }}" class="btn btn-secondary">← מודול קודם</a>
+            {% endif %}
+            <a href="{{ url_for('modules') }}" class="btn btn-primary">חזור לרשימה</a>
+            {% if module.id < 9 %}
+            <a href="{{ url_for('module_detail', module_id=module.id + 1) }}" class="btn btn-secondary">מודול הבא →</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
